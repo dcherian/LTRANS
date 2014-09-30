@@ -273,7 +273,7 @@ CONTAINS
       if( PRESENT(y) )then
         lat = (y * RCF / Earth_Radius + latmin) / RCF
         rx2lon = x !lonmin + RCF*acos( (cos(x/Earth_Radius) - sin(lat)*sin(lat)) &
-                                                        / (cos(lat)*cos(lat)) ) 
+                   !                                     / (cos(lat)*cos(lat)) )
       else
         write(*,*) "Problem x2lon: Spherical projection without y value"
       endif
