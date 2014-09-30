@@ -186,51 +186,51 @@ CONTAINS
       if (STATUS .NE. NF90_NOERR) write(*,*) NF90_STRERROR(STATUS)
 
       ! longitude at rho (°)
-      STATUS = NF90_INQ_VARID(NCID,'lon_rho',VID)
-      if (STATUS .NE. NF90_NOERR) write(*,*) 'Problem find lon_rho'
+      STATUS = NF90_INQ_VARID(NCID,'x_rho',VID)
+      if (STATUS .NE. NF90_NOERR) write(*,*) 'Problem find x_rho'
       if (STATUS .NE. NF90_NOERR) write(*,*) NF90_STRERROR(STATUS)
-      STATUS = NF90_GET_VAR(NCID,VID,lon_rho)
-      if (STATUS .NE. NF90_NOERR) write(*,*) 'Problem read lon_rho'
+      STATUS = NF90_GET_VAR(NCID,VID,x_rho)
+      if (STATUS .NE. NF90_NOERR) write(*,*) 'Problem read x_rho'
       if (STATUS .NE. NF90_NOERR) write(*,*) NF90_STRERROR(STATUS)
 
       ! latitude at rho (°)
-      STATUS = NF90_INQ_VARID(NCID,'lat_rho',VID)
-      if (STATUS .NE. NF90_NOERR) write(*,*) 'Problem find lat_rho'
+      STATUS = NF90_INQ_VARID(NCID,'y_rho',VID)
+      if (STATUS .NE. NF90_NOERR) write(*,*) 'Problem find y_rho'
       if (STATUS .NE. NF90_NOERR) write(*,*) NF90_STRERROR(STATUS)
-      STATUS = NF90_GET_VAR(NCID,VID,lat_rho)
-      if (STATUS .NE. NF90_NOERR) write(*,*) 'Problem read lat_rho'
+      STATUS = NF90_GET_VAR(NCID,VID,y_rho)
+      if (STATUS .NE. NF90_NOERR) write(*,*) 'Problem read y_rho'
       if (STATUS .NE. NF90_NOERR) write(*,*) NF90_STRERROR(STATUS)
 
       ! longitude at u (°)
-      STATUS = NF90_INQ_VARID(NCID,'lon_u',VID)
-      if (STATUS .NE. NF90_NOERR) write(*,*) 'Problem find lon_u'
+      STATUS = NF90_INQ_VARID(NCID,'x_u',VID)
+      if (STATUS .NE. NF90_NOERR) write(*,*) 'Problem find x_u'
       if (STATUS .NE. NF90_NOERR) write(*,*) NF90_STRERROR(STATUS)
-      STATUS = NF90_GET_VAR(NCID,VID,lon_u)
-      if (STATUS .NE. NF90_NOERR) write(*,*) 'Problem read lon_u'
+      STATUS = NF90_GET_VAR(NCID,VID,x_u)
+      if (STATUS .NE. NF90_NOERR) write(*,*) 'Problem read x_u'
       if (STATUS .NE. NF90_NOERR) write(*,*) NF90_STRERROR(STATUS)
 
       ! latitude at u (°)
-      STATUS = NF90_INQ_VARID(NCID,'lat_u',VID)
-      if (STATUS .NE. NF90_NOERR) write(*,*) 'Problem find lat_u'
+      STATUS = NF90_INQ_VARID(NCID,'y_u',VID)
+      if (STATUS .NE. NF90_NOERR) write(*,*) 'Problem find y_u'
       if (STATUS .NE. NF90_NOERR) write(*,*) NF90_STRERROR(STATUS)
-      STATUS = NF90_GET_VAR(NCID,VID,lat_u)
-      if (STATUS .NE. NF90_NOERR) write(*,*) 'Problem read lat_u'
+      STATUS = NF90_GET_VAR(NCID,VID,y_u)
+      if (STATUS .NE. NF90_NOERR) write(*,*) 'Problem read y_u'
       if (STATUS .NE. NF90_NOERR) write(*,*) NF90_STRERROR(STATUS)
 
       ! longitude at v (°)
-      STATUS = NF90_INQ_VARID(NCID,'lon_v',VID)
-      if (STATUS .NE. NF90_NOERR) write(*,*) 'Problem find lon_v'
+      STATUS = NF90_INQ_VARID(NCID,'x_v',VID)
+      if (STATUS .NE. NF90_NOERR) write(*,*) 'Problem find x_v'
       if (STATUS .NE. NF90_NOERR) write(*,*) NF90_STRERROR(STATUS)
-      STATUS = NF90_GET_VAR(NCID,VID,lon_v)
-      if (STATUS .NE. NF90_NOERR) write(*,*) 'Problem read lon_v'
+      STATUS = NF90_GET_VAR(NCID,VID,x_v)
+      if (STATUS .NE. NF90_NOERR) write(*,*) 'Problem read x_v'
       if (STATUS .NE. NF90_NOERR) write(*,*) NF90_STRERROR(STATUS)
 
       ! latitude at v (°)
-      STATUS = NF90_INQ_VARID(NCID,'lat_v',VID)
-      if (STATUS .NE. NF90_NOERR) write(*,*) 'Problem find lat_v'
+      STATUS = NF90_INQ_VARID(NCID,'y_v',VID)
+      if (STATUS .NE. NF90_NOERR) write(*,*) 'Problem find y_v'
       if (STATUS .NE. NF90_NOERR) write(*,*) NF90_STRERROR(STATUS)
-      STATUS = NF90_GET_VAR(NCID,VID,lat_v)
-      if (STATUS .NE. NF90_NOERR) write(*,*) 'Problem read lat_v'
+      STATUS = NF90_GET_VAR(NCID,VID,y_v)
+      if (STATUS .NE. NF90_NOERR) write(*,*) 'Problem read y_v'
       if (STATUS .NE. NF90_NOERR) write(*,*) NF90_STRERROR(STATUS)
 
       ! mask on rho grid
@@ -356,24 +356,24 @@ CONTAINS
     ! Convert rho nodes lon/lat to x/y coordinates
     do j=1,uj
       do i=1,vi
-        x_rho(i,j) = lon2x(lon_rho(i,j),lat_rho(i,j))
-        y_rho(i,j) = lat2y(lat_rho(i,j))
+        lat_rho(i,j) = x_rho(i,j) !lon2x(lon_rho(i,j),lat_rho(i,j))
+        lon_rho(i,j) = y_rho(i,j) !lat2y(lat_rho(i,j))
       enddo
     enddo
 
     ! Convert u nodes lon/lat to x/y coordinates
     do j=1,uj
       do i=1,ui
-        x_u(i,j) = lon2x(lon_u(i,j),lat_u(i,j))
-        y_u(i,j) = lat2y(lat_u(i,j))
+        lon_u(i,j) = x_u(i,j) !lon2x(lon_u(i,j),lat_u(i,j))
+        lat_u(i,j) = y_u(i,j) ! lat2y(lat_u(i,j))
       enddo
     enddo
 
     ! Convert v nodes lon/lat to x/y coordinates
     do j=1,vj
       do i=1,vi
-        x_v(i,j) = lon2x(lon_v(i,j),lat_v(i,j))
-        y_v(i,j) = lat2y(lat_v(i,j))
+        lon_v(i,j) = x_v(i,j) !lon2x(lon_v(i,j),lat_v(i,j))
+        lat_v(i,j) = y_v(i,j) !lat2y(lat_v(i,j))
       enddo
     enddo
 
