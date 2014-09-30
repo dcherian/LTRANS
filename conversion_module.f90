@@ -121,13 +121,13 @@ CONTAINS
         by = c * sin(blon)
         bz = sin(blat)
 
-        rlon2x = acos(ax*bx + ay*by + az*bz) * Earth_Radius
+        rlon2x = lon !acos(ax*bx + ay*by + az*bz) * Earth_Radius
 
       else
         write(*,*) "Problem lon2x: spherical projection without lat value"
       endif
     else
-      rlon2x = lon / RCF * Earth_Radius
+      rlon2x = lon !lon / RCF * Earth_Radius
     endif
 
   END FUNCTION rlon2x
@@ -165,13 +165,13 @@ CONTAINS
         by = c * sin(blon)
         bz = sin(blat)
 
-        dlon2x = acos(ax*bx + ay*by + az*bz) * Earth_Radius
+        dlon2x = lon !acos(ax*bx + ay*by + az*bz) * Earth_Radius
 
       else
         write(*,*) "Problem lon2x: spherical projection without lat value"
       endif
     else
-      dlon2x = lon / RCF * Earth_Radius
+      dlon2x = lon !lon / RCF * Earth_Radius
     endif
 
   END FUNCTION dlon2x
@@ -207,11 +207,11 @@ CONTAINS
       by = c * sin(blon)
       bz = sin(blat)
 
-      rlat2y = acos(ax*bx + ay*by + az*bz) * Earth_Radius
+      rlat2y = lat !acos(ax*bx + ay*by + az*bz) * Earth_Radius
 
     else
 
-      rlat2y = log( tan( pi/4.0 + lat/(RCF*2.0) ))*Earth_Radius
+      rlat2y = lat !log( tan( pi/4.0 + lat/(RCF*2.0) ))*Earth_Radius
 
     endif
 
@@ -248,11 +248,11 @@ CONTAINS
       by = c * sin(blon)
       bz = sin(blat)
 
-      dlat2y = acos(ax*bx + ay*by + az*bz) * Earth_Radius
+      dlat2y = lat !acos(ax*bx + ay*by + az*bz) * Earth_Radius
 
     else
 
-      dlat2y = log( tan( pi/4.0 + lat/(RCF*2.0) ))*Earth_Radius
+      dlat2y = lat !log( tan( pi/4.0 + lat/(RCF*2.0) ))*Earth_Radius
 
     endif
 
@@ -272,14 +272,14 @@ CONTAINS
 
       if( PRESENT(y) )then
         lat = (y * RCF / Earth_Radius + latmin) / RCF
-        rx2lon = lonmin + RCF*acos( (cos(x/Earth_Radius) - sin(lat)*sin(lat)) &
+        rx2lon = x !lonmin + RCF*acos( (cos(x/Earth_Radius) - sin(lat)*sin(lat)) &
                                                         / (cos(lat)*cos(lat)) ) 
       else
         write(*,*) "Problem x2lon: Spherical projection without y value"
       endif
 
     else
-      rx2lon = x / Earth_Radius * RCF
+      rx2lon = x !x / Earth_Radius * RCF
     endif
 
   END FUNCTION rx2lon
@@ -298,14 +298,14 @@ CONTAINS
 
       if( PRESENT(y) )then
         lat = (y * RCF / Earth_Radius + latmin) / RCF
-        dx2lon = lonmin + RCF*acos( (cos(x/Earth_Radius) - sin(lat)*sin(lat)) &
-                                                        / (cos(lat)*cos(lat)) ) 
+        dx2lon = x !lonmin + RCF*acos( (cos(x/Earth_Radius) - sin(lat)*sin(lat)) &
+                   !                                     / (cos(lat)*cos(lat)) )
       else
         write(*,*) "Problem x2lon: Spherical projection without y value"
       endif
 
     else
-      dx2lon = x / Earth_Radius * RCF
+      dx2lon = x !x / Earth_Radius * RCF
     endif
 
   END FUNCTION dx2lon
@@ -319,9 +319,9 @@ CONTAINS
     RCF = DBLE(180.0) / PI
 
     if(SphericalProjection) then
-      ry2lat = y * RCF / Earth_Radius + latmin
+      ry2lat = y !y * RCF / Earth_Radius + latmin
     else
-      ry2lat = 2.0*RCF * ( atan(exp(y/Earth_Radius)) - pi/4.0 )
+      ry2lat = y !2.0*RCF * ( atan(exp(y/Earth_Radius)) - pi/4.0 )
     endif
 
   END FUNCTION ry2lat
@@ -335,9 +335,9 @@ CONTAINS
     RCF = DBLE(180.0) / PI
 
     if(SphericalProjection) then
-      dy2lat = y * RCF / Earth_Radius + latmin
+      dy2lat = y !y * RCF / Earth_Radius + latmin
     else
-      dy2lat = 2.0*RCF * ( atan(exp(y/Earth_Radius)) - pi/4.0 )
+      dy2lat = y !2.0*RCF * ( atan(exp(y/Earth_Radius)) - pi/4.0 )
     endif
 
   END FUNCTION dy2lat
