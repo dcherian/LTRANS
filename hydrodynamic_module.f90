@@ -2959,6 +2959,8 @@ CONTAINS
 
     DOUBLE PRECISION, DIMENSION(numpar), OPTIONAL, INTENT(IN) :: dob
 
+    INTEGER :: shuffle, deflate, deflate_level
+
     INCLUDE 'netcdf.inc'
 
     CHARACTER(LEN=200) :: ncFile
@@ -2984,6 +2986,12 @@ CONTAINS
 
     !Reset Print Counter to 0
     prcount = 0
+
+    ! NETCDF4 parameters
+    shuffle = 1
+    deflate = 1
+    deflate_level = 1
+
 
     IF(outpathGiven)THEN
       IF(NCtime == 0 ) THEN
@@ -3059,6 +3067,17 @@ CONTAINS
         IF(STATUS /= NF90_NOERR) WRITE(*,*) 'Problem createNetCDF: color var'
         IF(STATUS /= NF90_NOERR) WRITE(*,*) NF_STRERROR(STATUS)
 
+        STATUS = NF90_DEF_VAR_DEFLATE(NCID,pageID,shuffle, deflate, &
+             deflate_level)
+        STATUS = NF90_DEF_VAR_DEFLATE(NCID,lonID,shuffle, deflate, &
+             deflate_level)
+        STATUS = NF90_DEF_VAR_DEFLATE(NCID,latID,shuffle, deflate, &
+             deflate_level)
+        STATUS = NF90_DEF_VAR_DEFLATE(NCID,depthID,shuffle, deflate, &
+             deflate_level)
+        STATUS = NF90_DEF_VAR_DEFLATE(NCID,colorID,shuffle, deflate, &
+             deflate_level)
+
         IF(TrackCollisions)THEN
           STATUS =NF90_DEF_VAR(NCID,'hitBottom',NF_DOUBLE,(/numparID,timeID/), &
                                hitBID)
@@ -3071,7 +3090,13 @@ CONTAINS
           IF(STATUS /= NF90_NOERR) WRITE(*,*) 'Problem createNetCDF: Land ',   &
                                               'Collision var'
           IF(STATUS /= NF90_NOERR) WRITE(*,*) NF_STRERROR(STATUS)
-        ENDIF
+
+          STATUS = NF90_DEF_VAR_DEFLATE(NCID,hitBID,shuffle, deflate, &
+               deflate_level)
+          STATUS = NF90_DEF_VAR_DEFLATE(NCID,hitLID,shuffle, deflate, &
+               deflate_level)
+       ENDIF
+
 
         IF(SaltTempOn)THEN
           STATUS = NF90_DEF_VAR(NCID,'salinity',NF_DOUBLE,(/numparID,timeID/), &
