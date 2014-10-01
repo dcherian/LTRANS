@@ -3004,7 +3004,7 @@ CONTAINS
 
     write(*,*)'Creating NetCDF Output File: ',TRIM(ncFile)
 
-    STATUS = NF90_CREATE(TRIM(ncFile), NF90_CLOBBER, NCID)
+    STATUS = NF90_CREATE(TRIM(ncFile), IOR(NF90_CLOBBER, NF90_NETCDF4), NCID)
     IF(STATUS /= NF90_NOERR) THEN
       WRITE(*,*) 'Problem creating NetCDF output file'
       WRITE(*,*) NF_STRERROR(STATUS)
