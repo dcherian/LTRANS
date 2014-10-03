@@ -1001,7 +1001,7 @@ contains
       z1 = Zpar +  Wad * DBLE(idt)/DBLE(2) 
       if(z1 .GT. minpartdepth) z1 = minpartdepth - DBLE(0.000001)
       if(z1 .LT. maxpartdepth) z1 = maxpartdepth + DBLE(0.000001)
-
+      print *, 'calling find_currents 2, n = ', n
       !Find advection currents at estimated next RK position
       CALL find_currents(x1,y1,z1,Pwc_zb,Pwc_zc,Pwc_zf,Pwc_wzb,Pwc_wzc,        &
                          Pwc_wzf,P_zb,P_zc,P_zf,ex,ix,p,2,Uad,Vad,Wad)
